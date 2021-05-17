@@ -158,7 +158,7 @@ export default function Home() {
               </DndFile>
             )}
             <label className="w-full pb-4 cursor-pointer" htmlFor="reason">
-              ¿Por qué se deben ir estos archivos?
+              ¿Por qué se deben ir estos archivos? ¿Vas a reemplazarlos con otros? ¿Qué hace que estos prevalezcan por sobre los otros?
             </label>
             <textarea
               disabled={form.submitting || form.submitted}
