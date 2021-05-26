@@ -16,9 +16,15 @@ export default function SEO({ description, image, title }: SEO) {
       <meta name="description" content={description} />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
-      {process.browser && <meta property="og:url" content={window.location.href} key="ogurl" />}
+      {process.browser && (
+        <meta property="og:url" content={window.location.href} key="ogurl" />
+      )}
       {image && <meta property="og:image" content={image} key="ogimage" />}
-      <meta property="og:site_name" content="Descartes / Basura digital" key="ogsitename" />
+      <meta
+        property="og:site_name"
+        content="Descartes / Basura digital"
+        key="ogsitename"
+      />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
     </Head>

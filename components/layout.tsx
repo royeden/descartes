@@ -1,16 +1,17 @@
-import { PropsWithChildren } from "react"
-import SEO, { SEO as SEOTYPE } from "./SEO"
+import { PropsWithChildren } from "react";
+import SEO, { SEO as SEOTYPE } from "./SEO";
 
 type Props = {
   className: string;
   seo: SEOTYPE;
-}
+};
 
 export function Layout({ children, className, seo }: PropsWithChildren<Props>) {
-  return <div className="relative flex flex-col min-h-screen">
-    <SEO {...seo} />
-    <main className={className}>{children}</main>
-    <footer className="flex items-center justify-center w-full h-24 pb-2 border-t">
+  return (
+    <div className="relative flex flex-col min-h-screen">
+      <SEO {...seo} />
+      <main className={className}>{children}</main>
+      <footer className="flex items-center justify-center w-full h-24 pb-2 border-t">
         <p>
           Hecho por{" "}
           <a
@@ -23,5 +24,6 @@ export function Layout({ children, className, seo }: PropsWithChildren<Props>) {
           </a>
         </p>
       </footer>
-  </div>
+    </div>
+  );
 }
