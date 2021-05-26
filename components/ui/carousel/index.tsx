@@ -90,11 +90,11 @@ export default function Carousel({ files, onDelete }: Props) {
       )}
       {onDelete && <div className="absolute inset-x-0 top-0 flex items-center justify-center w-full">
         <Button
-          className="w-48 text-white bg-red-500 disabled:bg-gray-400 focus:bg-red-400 hover:bg-red-400"
+          className="text-white bg-red-500 disabled:bg-gray-400 focus:bg-red-400 hover:bg-red-400"
           onClick={() => onDelete(current)}
           type="button"
         >
-          Descartar
+          No quiero subir este archivo
         </Button>
       </div>}
       <m.div
