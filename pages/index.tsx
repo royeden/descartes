@@ -8,6 +8,7 @@ import {
 } from "react";
 
 import DndFile from "../components/forms/dndFile";
+import { Layout } from "../components/layout";
 import Button from "../components/ui/button";
 import Carousel from "../components/ui/carousel";
 import Loading from "../components/ui/loading";
@@ -101,13 +102,10 @@ export default function Home() {
     [form]
   );
   return (
-    <div className="relative flex flex-col min-h-screen py-2">
-      <Head>
-        <title>Basura Digital</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center flex-1 px-5 py-8 text-center sm:px-20">
+    <Layout className="flex flex-col items-center flex-1 px-5 pt-10 text-center sm:px-20" seo={{
+      description: "Donde volcar tu basura digital...",
+      title: "Basura Digital"
+    }}>
         <h1 className="text-6xl font-bold">Basura Digital</h1>
         <form className="flex flex-col items-center w-full" onSubmit={onSubmit}>
           <div className="flex flex-col w-full max-w-lg">
@@ -213,21 +211,6 @@ export default function Home() {
             </Button>
           </div>
         </form>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <p>
-          Hecho por{" "}
-          <a
-            className="transition-colors duration-300 focus:outline-none focus:text-indigo-600 hover:text-indigo-600"
-            href="https://github.com/royeden"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Roy Eden</b>
-          </a>
-        </p>
-      </footer>
-    </div>
+    </Layout>
   );
 }
