@@ -93,6 +93,9 @@ export default function Home() {
         } catch (error) {
           mergeForm({ submitting: false });
         }
+      } else {
+        // TODO replace with a nicer alert component
+        if (!form.files.length) alert("Por favor agregá al menos un archivo para subir");
       }
     },
     [form]
@@ -202,8 +205,6 @@ export default function Home() {
             <Button
               className="w-48 text-white bg-indigo-600 disabled:bg-gray-400 focus:bg-indigo-500 hover:bg-indigo-500"
               disabled={
-                !form.reason ||
-                !form.files.length ||
                 form.loading ||
                 form.submitting
               }
