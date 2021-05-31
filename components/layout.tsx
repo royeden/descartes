@@ -3,15 +3,16 @@ import SEO, { SEO as SEOTYPE } from "./SEO";
 
 type Props = {
   className: string;
+  footer?: boolean;
   seo: SEOTYPE;
 };
 
-export function Layout({ children, className, seo }: PropsWithChildren<Props>) {
+export function Layout({ children, className, footer = true, seo }: PropsWithChildren<Props>) {
   return (
     <div className="relative flex flex-col min-h-screen">
       <SEO {...seo} />
       <main className={className}>{children}</main>
-      <footer className="flex items-center justify-center w-full h-24 pb-2 border-t">
+      {footer && <footer className="flex items-center justify-center w-full h-24 pb-2 border-t">
         <p>
           Hecho por{" "}
           <a
@@ -23,7 +24,7 @@ export function Layout({ children, className, seo }: PropsWithChildren<Props>) {
             <b>Roy Eden</b>
           </a>
         </p>
-      </footer>
+      </footer>}
     </div>
   );
 }
