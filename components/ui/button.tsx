@@ -6,13 +6,13 @@ export default function Button({
   className,
   disabled,
   ...props
-}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) {
+}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>): JSX.Element {
   return (
     <button
       {...props}
       disabled={disabled}
       className={clsx(
-        "px-8 py-3 font-bold transition duration-300 ease-in-out rounded-full shadow focus:outline-none hover:shadow-md focus:shadow-md",
+        "px-8 py-3 font-memory font-bold transition duration-300 ease-in-out rounded-full shadow focus:outline-none hover:shadow-md focus:shadow-md",
         className
       )}
     >

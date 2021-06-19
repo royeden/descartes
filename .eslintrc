@@ -39,6 +39,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
+    "plugin:@next/next/recommended",
     "plugin:prettier/recommended" // Make this the last element so prettier config overrides other formatting rules
   ],
   "rules": {

@@ -7,17 +7,16 @@ type ItemProps = {
 };
 
 const variants: Variants = {
-  enter: (direction: number) => ({
-    opacity: 0,
-  }),
   center: {
     opacity: 1,
   },
-  exit: (direction: number) => ({
+  enter: () => ({
+    opacity: 0,
+  }),
+  exit: () => ({
     opacity: 1,
   }),
 };
-
 
 export default function Item({ file, onClick }: ItemProps) {
   return (
@@ -33,8 +32,8 @@ export default function Item({ file, onClick }: ItemProps) {
       transition={{
         duration: 3,
         opacity: {
-          delay: 1.5
-        }
+          delay: 1.5,
+        },
       }}
     >
       {onClick ? (

@@ -1,12 +1,12 @@
 // import { google }
 // https://betterprogramming.pub/upload-files-to-next-js-with-api-routes-839ce9f28430
-import nextConnect from "next-connect";
-import multer from "multer";
+import axios, { AxiosResponse } from "axios";
 import base64url from "base64url";
+import multer from "multer";
+import { NextApiRequest, NextApiResponse } from "next";
+import nextConnect from "next-connect";
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
 
 const storage = multer.memoryStorage();
 const uploadMiddleware = multer({
@@ -53,16 +53,16 @@ async function post({
   filename,
   reason,
   lastModified,
-}: Post) {
+}: Post): Promise<AxiosResponse<any> & { base64: string; base64url: string }> {
   const response = await axios.post(
     // TODO replace with env url here
     process.env.GOOGLE_APP_URL as string,
     JSON.stringify({
       file: file.buffer.toString("base64"),
-      mime,
-      name,
       filename,
       lastModified,
+      mime,
+      name,
       reason,
     }),
     {
