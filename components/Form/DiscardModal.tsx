@@ -64,6 +64,7 @@ export default function DiscardModal({
         // TODO add error toast
         console.error(error);
       }
+      setLoading(false);
     }
   }, [loading, mergeForm, reason, resource, setLoading]);
 
