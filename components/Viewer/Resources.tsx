@@ -77,7 +77,7 @@ export default function Resources({
     <>
       {resources.map((resource) => (
         <Suspense
-          key={resource.filename}
+          key={resource.resource_id}
           fallback={
             <Billboard
               position={[
