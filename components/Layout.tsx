@@ -8,7 +8,6 @@ type Props = {
   className?: string;
   footer?: boolean;
   nav?: boolean;
-  padTop?: boolean;
   seo: SEOTYPE;
 };
 
@@ -17,7 +16,6 @@ export function Layout({
   className = "",
   footer = true,
   nav = true,
-  padTop = true,
   seo,
 }: PropsWithChildren<Props>): JSX.Element {
   return (
@@ -27,7 +25,7 @@ export function Layout({
       <main
         className={clsx(
           {
-            "pt-16": padTop,
+            "pt-16": nav,
           },
           className
         )}
