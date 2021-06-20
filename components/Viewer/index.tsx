@@ -1,4 +1,5 @@
 import { Resource, ResourcesResponse } from "pages/api/resources/get-all";
+import { CenterResponse } from "pages/api/resources/get-center";
 import { useCallback, useContext, useRef, useState } from "react";
 import { Vector3 } from "three";
 
@@ -10,7 +11,9 @@ import Button from "~components/ui/button";
 import { SoundContext } from "~context/SoundContext";
 import useMobileDetect from "~hooks/useMobileDetect";
 
-export default function Viewer({ resources }: ResourcesResponse): JSX.Element {
+type Props = CenterResponse & ResourcesResponse;
+
+export default function Viewer({ center, resources }: Props): JSX.Element {
   const detectMobile = useMobileDetect();
   const [controlsEnabled, setControlsEnabled] = useState(false);
   const [currentResource, setCurrentResource] =
@@ -51,6 +54,7 @@ export default function Viewer({ resources }: ResourcesResponse): JSX.Element {
   return (
     <div className="relative flex-1">
       <LCanvas
+        center={center}
         className="bg-black"
         hasFly={controlsEnabled && !detectMobile.isMobile()}
         hasOrbit={controlsEnabled && detectMobile.isMobile()}
