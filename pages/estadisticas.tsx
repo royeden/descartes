@@ -1,20 +1,16 @@
-import { GetStaticProps } from "next";
 import useSWR from "swr";
 
 import { ResourcesResponse } from "./api/resources/get-all";
 
-import fetcher from "~api/fetcher";
 import { Layout } from "~components/Layout";
 import ServerError from "~components/ServerError";
 import ServerStatusProvider from "~context/ServerStatus";
 
-export default function Estadisticas({
-  resources,
-}: ResourcesResponse): JSX.Element {
+export default function Estadisticas(): JSX.Element {
   const { data, error } = useSWR<ResourcesResponse>(
     "/api/resources/get-all",
     (url) => fetch(url).then((res) => res.json()),
-    { initialData: { resources }, refreshInterval: 60000 }
+    { refreshInterval: 60000 }
   );
 
   return (
@@ -34,14 +30,3 @@ export default function Estadisticas({
     </ServerStatusProvider>
   );
 }
-
-// TODO fetch images
-export const getStaticProps: GetStaticProps = async () => {
-  const resources = await fetcher("/resource/all");
-  return {
-    props: {
-      resources,
-      revalidate: 86400000,
-    },
-  };
-};
