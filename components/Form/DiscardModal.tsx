@@ -1,20 +1,27 @@
+import axios from "axios";
 import clsx from "clsx";
 import Image from "next/image";
-import { Resource } from "pages/api/resources/get-all";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ResourceResponse } from "pages/api/resources/get";
+import type { Resource } from "pages/api/resources/get-all";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import ReactModal from "react-modal";
 
 import Input from "~components/forms/input";
 import Icon from "~components/ui/Icon";
 import RevealText from "~components/ui/RevealText";
 import Button from "~components/ui/button";
+import { FormContext } from "~context/FormContext";
 import usePrevious from "~hooks/usePrevious";
 
 type Props = {
   handlePrev: () => void;
   handleNext: () => void;
-  loading: boolean;
-  onDiscard: (resource: Resource, reason: string) => void;
   resource?: Resource;
   setResource: (resource?: Resource) => void;
 };
@@ -23,17 +30,42 @@ const loader = ({ src }: { src: string }): string =>
   `${process.env.NEXT_PUBLIC_STATIC_URL as string}${src}`;
 
 export default function DiscardModal({
-  loading,
   handleNext,
   handlePrev,
-  onDiscard,
   resource,
   setResource,
 }: Props): JSX.Element {
   const [reason, setReason] = useState("");
   const [discarding, setDiscarding] = useState(false);
-
   const prevResource = usePrevious<Resource | undefined>(resource);
+
+  const { loading, setLoading, mergeForm } = useContext(FormContext);
+
+  const handleDiscard = useCallback(async () => {
+    if (resource && reason && !loading) {
+      setLoading(true);
+      try {
+        const response = await axios.post<ResourceResponse>(
+          "/api/resources/update",
+          {
+            id: resource.resource_id,
+            reason,
+          }
+        );
+        if (!response.data.resource) throw new Error("Error updating file");
+        mergeForm(({ selected, step }) => ({
+          selected: [
+            ...selected,
+            (response.data.resource as Resource).resource_id,
+          ],
+          step: step + 1,
+        }));
+      } catch (error) {
+        // TODO add error toast
+        console.error(error);
+      }
+    }
+  }, [loading, mergeForm, reason, resource, setLoading]);
 
   useEffect(() => {
     if (prevResource?.resource_id !== resource?.resource_id) {
@@ -62,7 +94,7 @@ export default function DiscardModal({
           {children}
         </div>
       )}
-      className="absolute flex flex-col items-center gap-6 overflow-hidden text-white bg-gray-800 md:items-start inset-x-4 md:inset-x-10 rounded-xl focus:outline-none md:grid md:grid-cols-2 md:grid-rows-none"
+      className="absolute flex flex-col items-center gap-6 pb-4 overflow-hidden text-white bg-gray-800 md:items-start inset-x-4 md:inset-x-10 rounded-xl focus:outline-none md:grid md:grid-cols-2 md:grid-rows-none md:pb-0"
       closeTimeoutMS={300}
     >
       <>
@@ -89,7 +121,7 @@ export default function DiscardModal({
               {discarding ? (
                 <div className="flex justify-center w-full">
                   <div className="flex flex-col">
-                    <label htmlFor="reason">
+                    <label htmlFor="reason text-sm md:text-base">
                       ¿Qué te hizo elegir esta imagen por sobre las demás?
                     </label>
                     <Input
@@ -106,7 +138,7 @@ export default function DiscardModal({
                     <Button
                       className="self-center my-2 text-white transition duration-300 ease-in-out shadow active:shadow-none bg-rose-600 hover:bg-rose-500 focus:bg-rose-500 active:bg-pink-400 disabled:bg-gray-700"
                       disabled={!reason || loading}
-                      onClick={() => onDiscard(resource, reason)}
+                      onClick={handleDiscard}
                       type="button"
                     >
                       Descartar
@@ -123,7 +155,7 @@ export default function DiscardModal({
                   >
                     <Icon type="caret-left" />
                   </button>
-                  <div className="flex flex-col justify-center">
+                  <div className="flex flex-col justify-center space-y-2 text-sm md:text-base">
                     <p>
                       <RevealText text={`Nombre: ${resource.filename}`} />
                     </p>
@@ -133,11 +165,18 @@ export default function DiscardModal({
                       />
                     </p>
                     <p>
-                      <RevealText text={`Subido por: ${resource.author}`} />
-                    </p>
-                    <p>
                       <RevealText text={`Tamaño actual: ${resource.size}`} />
                     </p>
+                    <p>
+                      <RevealText text={`Subido por: ${resource.author}`} />
+                    </p>
+                    {resource.reason?.[0] && (
+                      <p>
+                        <RevealText
+                          text={`Epígrafe: ${resource.reason[0].content}`}
+                        />
+                      </p>
+                    )}
                     <Button
                       className="self-center my-2 text-white transition duration-300 ease-in-out shadow active:shadow-none bg-rose-600 hover:bg-rose-500 focus:bg-rose-500 active:bg-pink-400"
                       onClick={() => setDiscarding(true)}

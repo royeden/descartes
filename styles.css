@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  @apply font-memory;
+  @apply font-montserrat;
 }
 
 .modal-overlay {

@@ -19,23 +19,29 @@ export default function Intro({ onStart }: Props): JSX.Element {
   });
 
   return (
-    <>
-      <h1 className="mb-8 text-5xl font-bold font-faded">
+    <div className="flex flex-col items-center px-4 py-4 space-y-2 md:space-y-8 md:py-20 md:px-20 scrollbar-thin scrollbar-thumb-rose-400">
+      <h1 className="text-5xl font-bold md:text-6xl font-rubik">
         <RevealText
           text="Descartes: Basura Digital"
           onEnd={() => mergeShownText({ title: true })}
         />
       </h1>
-
-      <div className="w-full px-4 my-4 text-lg text-left md:w-1/2 lg:1/5 md:px-0">
-        <p className="mb-8">
+      <div className="w-full px-4 my-2 space-y-4 text-base text-left md:my-4 md:text-lg md:space-y-8 md:w-1/2 lg:1/5 md:px-0">
+        <p>
           <RevealText
             animate={shownText.title}
             onEnd={() => mergeShownText({ introduction: true })}
-            text="Este proyecto apunta a hacer un análisis sobre el descarte de contenidos digitales, en una muestra web interactiva donde todxs somos participantes."
+            text="Este proyecto apunta a hacer un análisis sobre el descarte de contenidos digitales, en una galería web interactiva donde todxs somos participantes."
           />
         </p>
-        <p className="mb-8">
+        <p>
+          <RevealText
+            animate={shownText.title}
+            onEnd={() => mergeShownText({ introduction: true })}
+            text="Las imágenes que se muestran en la galería son aportes de cada participante sumado a un aporte inicial por lx autorx."
+          />
+        </p>
+        <p>
           <RevealText
             animate={shownText.introduction}
             onEnd={() => mergeShownText({ disclaimer: true })}
@@ -43,7 +49,7 @@ export default function Intro({ onStart }: Props): JSX.Element {
           />
         </p>
         {process.browser && detectMobile.isMobile() && (
-          <p className="mb-8">
+          <p>
             <RevealText
               animate={shownText.disclaimer}
               text="Se sugiere también acceder desde una computadora en lugar de un dispositivo móvil."
@@ -59,7 +65,7 @@ export default function Intro({ onStart }: Props): JSX.Element {
         )}
       >
         <Button
-          className="w-48 text-white bg-purple-600 disabled:bg-gray-400 focus:bg-purple-500 hover:bg-purple-500 active:bg-purple-400"
+          className="w-48 text-white bg-purple-600 focus:bg-purple-500 hover:bg-purple-500 active:bg-purple-400"
           disabled={!shownText.disclaimer}
           onClick={onStart}
           type="button"
@@ -67,6 +73,6 @@ export default function Intro({ onStart }: Props): JSX.Element {
           Comenzar
         </Button>
       </div>
-    </>
+    </div>
   );
 }

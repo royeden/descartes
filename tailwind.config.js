@@ -10,10 +10,11 @@ module.exports = {
     extend: {
       colors: {
         rose: colors.rose,
+        "true-gray": colors.trueGray,
       },
       fontFamily: {
-        faded: ["'Rubik'", "sans-serif"],
-        memory: ["'Montserrat'", "sans-serif"],
+        montserrat: ["'Montserrat'", "sans-serif"],
+        rubik: ["'Rubik'", "sans-serif"],
       },
     },
   },

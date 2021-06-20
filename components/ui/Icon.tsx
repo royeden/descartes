@@ -6,10 +6,13 @@ import {
   FaVolumeOff,
   FaVolumeUp,
 } from "react-icons/fa";
+import { MdClose, MdMenu } from "react-icons/md";
 
 const ICONS = {
   "caret-left": FaCaretLeft,
   "caret-right": FaCaretRight,
+  close: MdClose,
+  menu: MdMenu,
   "volume-down": FaVolumeDown,
   "volume-mute": FaVolumeMute,
   "volume-off": FaVolumeOff,

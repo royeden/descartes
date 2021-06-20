@@ -13,18 +13,20 @@ const Form = dynamic(() => import("~components/Form"), {
 
 export default function Home(): JSX.Element {
   const { setPlaying } = useContext(SoundContext);
+
   const [introduction, setIntroduction] = useLocalStorage(
     "introduction",
     false
   );
+
   const inBrowser = useInBrowser();
 
   return (
     <Layout
       className="flex flex-col flex-1 text-center text-white bg-black"
       seo={{
-        description: "Donde volcar tu basura digital...",
-        title: "Basura Digital",
+        description: "Galería interactiva colaborativa",
+        title: "Descartes: Basura Digital",
       }}
       nav={inBrowser && introduction}
       footer={false}

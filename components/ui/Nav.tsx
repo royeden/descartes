@@ -38,7 +38,7 @@ export default function Nav({ className = "" }: Props): JSX.Element {
   return (
     <nav
       className={clsx(
-        "fixed h-16 w-full z-30 flex bg-gray-800 text-white font-bold shadow-2xl",
+        "fixed h-16 w-full z-30 flex bg-true-gray-900 text-white font-bold shadow-2xl",
         className
       )}
     >

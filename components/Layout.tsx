@@ -1,8 +1,10 @@
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 import { PropsWithChildren } from "react";
 
 import SEO, { SEO as SEOTYPE } from "./SEO";
-import Nav from "./ui/Nav";
+
+const Nav = dynamic(() => import("./ui/Nav"), { ssr: false });
 
 type Props = {
   className?: string;

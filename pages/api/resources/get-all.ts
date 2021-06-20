@@ -15,7 +15,7 @@ export type Resource = {
   filename: string;
   last_modified: string;
   name: string;
-  reason: Reason;
+  reason: Reason[];
   resource_id: number;
   original_size: number;
   size: number;

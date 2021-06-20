@@ -1,27 +1,59 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { Resource } from "pages/api/resources/get-all";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import DndFile from "~components/forms/DndFile";
 import Input from "~components/forms/input";
 import Button from "~components/ui/button";
+import { FormContext } from "~context/FormContext";
 import useMobileDetect from "~hooks/useMobileDetect";
 
-type Props = {
-  loading: boolean;
-  onUpload: (file: File, reason: string) => void;
-};
-
-export default function Upload({ loading, onUpload }: Props): JSX.Element {
+export default function Upload(): JSX.Element {
   const [reason, setReason] = useState("");
   const [file, setFile] = useState<File | undefined>();
   const detectMobile = useMobileDetect();
 
   const resourceURL = useMemo(() => file && URL.createObjectURL(file), [file]);
 
+  const { form, loading, setLoading, mergeForm } = useContext(FormContext);
+
   useEffect(() => {
-    if (resourceURL) {
-      return () => URL.revokeObjectURL(resourceURL);
-    }
+    if (resourceURL) return () => URL.revokeObjectURL(resourceURL);
   }, [resourceURL]);
+
+  const handleUpload = useCallback(async () => {
+    if (loading && reason && file) {
+      setLoading(true);
+      try {
+        if (file.size > 5 * 1000 * 1000)
+          throw new Error("Max file size exceeded");
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("lastModified", `${file.lastModified}`);
+        formData.append("reason", reason);
+        formData.append("name", form.name || "Anónimx");
+        const response = await axios.post<Resource>(
+          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create/`,
+          formData
+        );
+        if (!response.data.resource_id) throw new Error("Couldn't create file");
+        mergeForm({
+          uploaded: response.data.resource_id as number,
+        });
+      } catch (error) {
+        // TODO add toast
+        console.error(error);
+      }
+      setLoading(false);
+    }
+  }, [file, form.name, loading, mergeForm, reason, setLoading]);
 
   return (
     <>
@@ -67,7 +99,7 @@ export default function Upload({ loading, onUpload }: Props): JSX.Element {
             <Button
               className="w-48 px-4 text-white bg-purple-600 focus:bg-purple-500 hover:bg-purple-500 active:bg-purple-400 disabled:bg-gray-400"
               disabled={!reason}
-              onClick={() => onUpload(file as File, reason)}
+              onClick={handleUpload}
               type="button"
             >
               Subir

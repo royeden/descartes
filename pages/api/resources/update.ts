@@ -1,15 +1,12 @@
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+import { ResourceResponse } from "./get";
 import { Resource } from "./get-all";
-
-export type ResourcesResponse = {
-  resource: Resource;
-};
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse<ResourcesResponse>
+  res: NextApiResponse<ResourceResponse>
 ): Promise<void> => {
   const { id, reason } = req.body;
   const resource = (
