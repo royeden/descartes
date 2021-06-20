@@ -1,6 +1,6 @@
 import { Resource, ResourcesResponse } from "pages/api/resources/get-all";
 import { CenterResponse } from "pages/api/resources/get-center";
-import { useCallback, useContext, useRef, useState } from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import { Vector3 } from "three";
 
 import LCanvas from "./Canvas";
@@ -49,6 +49,10 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
     [positionVector, reducerVector, resources]
   );
 
+  const data = useMemo(() => currentResource?.reason ?? [], [currentResource]);
+
+  const [epigraph, ...reasons] = data;
+
   const { setPlaying } = useContext(SoundContext);
 
   return (
@@ -67,8 +71,8 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
           }}
           resources={resources}
         />
-        <ambientLight position={[0, 0, 0]} intensity={0.8} />
-        <pointLight intensity={1} position={[0, 0, 0]} />
+        <ambientLight position={center} intensity={0.8} />
+        <pointLight intensity={1} position={center} />
       </LCanvas>
       {/* TODO move UI to component */}
       <div className="absolute inset-0 text-white pointer-events-none text-md lg:text-lg">
@@ -80,14 +84,36 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
           </div>
         ) : currentResource ? (
           <button
-            className="bg-black bg-opacity-75 pointer-events-auto"
+            className="w-full h-full text-left pointer-events-auto"
             type="button"
             onClick={() => {
               setCurrentResource(undefined);
               setControlsEnabled(true);
             }}
           >
-            <h1>{currentResource.name}</h1>
+            <div className="px-4 bg-black bg-opacity-50 hover:bg-opacity-75 w-max">
+              <h1 className="text-lg font-bold">{currentResource.name}</h1>
+              <p>Nombre: {currentResource.name}.</p>
+              <p>Tamaño original: {currentResource.original_size}.</p>
+              <p>Tamaño actual: {currentResource.size}.</p>
+              {epigraph && (
+                <>
+                  <p>Epígrafe: </p>
+                  <p>{epigraph.content}</p>
+                </>
+              )}
+              {Boolean(reasons.length) && (
+                <ul>
+                  Motivos de su descarte:
+                  {reasons.map(({ resource_id, content }) => (
+                    <li className="list-disc list-inside" key={resource_id}>
+                      {content}.
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p>Click en cualquier lugar para salir.</p>
+            </div>
           </button>
         ) : (
           <div className="inset-0 flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-50">
