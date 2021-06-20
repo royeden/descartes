@@ -28,7 +28,6 @@ export default function Home(): JSX.Element {
       }}
       nav={inBrowser && introduction}
       footer={false}
-      padTop={inBrowser && !introduction}
     >
       {introduction ? (
         <Form />
