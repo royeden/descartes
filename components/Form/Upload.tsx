@@ -29,7 +29,7 @@ export default function Upload(): JSX.Element {
   }, [resourceURL]);
 
   const handleUpload = useCallback(async () => {
-    if (loading && reason && file) {
+    if (!loading && reason && file) {
       setLoading(true);
       try {
         if (file.size > 5 * 1000 * 1000)
@@ -40,7 +40,7 @@ export default function Upload(): JSX.Element {
         formData.append("reason", reason);
         formData.append("name", form.name || "Anónimx");
         const response = await axios.post<Resource>(
-          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create/`,
+          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create`,
           formData
         );
         if (!response.data.resource_id) throw new Error("Couldn't create file");
@@ -66,8 +66,8 @@ export default function Upload(): JSX.Element {
         >
           <p className="text-white">
             {!detectMobile.isMobile()
-              ? "Arrastrá un archivo acá o hace click para añadir un archivo"
-              : "Tocá acá para añadir un archivo"}
+              ? "Arrastrá una imagen acá o hace click para añadir una image"
+              : "Tocá acá para añadir una imagen"}
           </p>
         </DndFile>
       )}
@@ -79,6 +79,9 @@ export default function Upload(): JSX.Element {
             alt={file?.name}
             className="object-contain w-full"
           />
+          <label htmlFor="name" className="font-bold cursor-pointer">
+            Ingresá un épigrafe para tu imagen:
+          </label>
           <Input
             className="w-full p-2 my-4 overflow-y-auto transition duration-300 ease-in-out bg-transparent border-2 border-gray-600 rounded shadow-sm hover:border-purple-800 focus:border-purple-800 focus:outline-none focus:ring-1 ring-purple-400 disabled:bg-gray-100 disabled:text-gray-900 disabled:cursor-not-allowed scrollbar-thin scrollbar-thumb-rose-400 max-h-36 md:w-auto"
             maxLength={1023}
@@ -91,7 +94,9 @@ export default function Upload(): JSX.Element {
           <div className="flex justify-between">
             <Button
               className="w-48 px-4 text-white bg-rose-600 focus:bg-rose-500 hover:bg-rose-500 active:bg-rose-400 disabled:bg-gray-400"
-              onClick={() => setFile(undefined)}
+              onClick={() => {
+                if (!loading) setFile(undefined);
+              }}
               type="button"
             >
               Cancelar
