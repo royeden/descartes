@@ -38,6 +38,7 @@ export default function Ver({
         <ServerError message="Hubo un error conectando con el servidor, por favor intentá nuevamente más tarde...">
           {resources && (
             <Viewer
+              center={[0, 0, 0]}
               resources={!error && data?.resources ? data.resources : resources}
             />
           )}
