@@ -32,7 +32,7 @@ export default function Upload(): JSX.Element {
     if (!loading && reason && file) {
       setLoading(true);
       try {
-        if (file.size > 5 * 1000 * 1000)
+        if (file.size > 10 * 1000 * 1000)
           throw new Error("Max file size exceeded");
         const formData = new FormData();
         formData.append("file", file);
@@ -56,7 +56,15 @@ export default function Upload(): JSX.Element {
   }, [file, form.name, loading, mergeForm, reason, setLoading]);
 
   return (
-    <>
+    <div className="p-4 space-y-4 text-left md:space-y-8">
+      <p>
+        Para acceder a la galería, hace falta que hagas un aporte propio de
+        material para subir (Tamaño máximo 10MB).
+      </p>
+      <p>
+        Todo lo subido va a recortarse de forma cuadrada para poder entrar en la
+        galería.
+      </p>
       {!file && (
         <DndFile
           accept="image/*"
@@ -113,6 +121,6 @@ export default function Upload(): JSX.Element {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

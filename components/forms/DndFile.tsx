@@ -32,9 +32,9 @@ export default function DndFile({
     <label
       className={clsx(
         className,
-        "cursor-pointer border-2 transition-colors duration-300 ease-in-out flex items-center justify-center p-4 rounded",
+        "cursor-pointer py-8 px-4 border-2 transition-colors duration-300 ease-in-out flex items-center justify-center rounded",
         {
-          "border-dashed border-black hover:border-purple-600 focus-within:border-purple-600":
+          "border-dashed border-true-gray-500 hover:border-purple-600 focus-within:border-purple-600":
             !dragging,
           "border-purple-600": dragging,
         }
