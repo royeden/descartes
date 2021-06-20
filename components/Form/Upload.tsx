@@ -40,7 +40,7 @@ export default function Upload(): JSX.Element {
         formData.append("reason", reason);
         formData.append("name", form.name || "Anónimx");
         const response = await axios.post<Resource>(
-          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create`,
+          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create/`,
           formData
         );
         if (!response.data.resource_id) throw new Error("Couldn't create file");
@@ -66,7 +66,7 @@ export default function Upload(): JSX.Element {
         >
           <p className="text-white">
             {!detectMobile.isMobile()
-              ? "Arrastrá una imagen acá o hace click para añadir una image"
+              ? "Arrastrá una imagen acá o hace click para añadir una imagen"
               : "Tocá acá para añadir una imagen"}
           </p>
         </DndFile>
@@ -94,6 +94,7 @@ export default function Upload(): JSX.Element {
           <div className="flex justify-between">
             <Button
               className="w-48 px-4 text-white bg-rose-600 focus:bg-rose-500 hover:bg-rose-500 active:bg-rose-400 disabled:bg-gray-400"
+              disabled={loading}
               onClick={() => {
                 if (!loading) setFile(undefined);
               }}
@@ -103,7 +104,7 @@ export default function Upload(): JSX.Element {
             </Button>
             <Button
               className="w-48 px-4 text-white bg-purple-600 focus:bg-purple-500 hover:bg-purple-500 active:bg-purple-400 disabled:bg-gray-400"
-              disabled={!reason}
+              disabled={!reason || loading}
               onClick={handleUpload}
               type="button"
             >
