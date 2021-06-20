@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~api/*": ["lib/api/*"],
+      "~components/*": ["components/*"],
+      "~context/*": ["context/*"],
+      "~hooks/*": ["lib/hooks/*"],
+      "~utils/*": ["lib/utils/*"]
+    },
     "target": "es5",
     "module": "esnext",
     "jsx": "preserve",

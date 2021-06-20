@@ -1,11 +1,11 @@
-import { useState, SetStateAction, Dispatch, useCallback } from "react";
 import deepMerge from "deepmerge";
+import { useState, SetStateAction, Dispatch } from "react";
 
 type SetPartialStateAction<S> = Partial<S> | ((prevState: S) => Partial<S>);
-type DispatchPartial<T> = Dispatch<SetPartialStateAction<T>>;
+export type DispatchPartial<T> = Dispatch<SetPartialStateAction<T>>;
 type ObjectStateHook<T> = [T, DispatchPartial<T>, Dispatch<SetStateAction<T>>];
 
-export default function useObjectState<T extends object>(
+export default function useObjectState<T extends Record<string, unknown>>(
   initialState: T | (() => T)
 ): ObjectStateHook<T> {
   const [state, setState] = useState<T>(initialState);

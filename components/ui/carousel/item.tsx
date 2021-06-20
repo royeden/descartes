@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
-import { FilesWithType } from "../../../lib/hooks/useDndFile";
+
+import { FilesWithType } from "../../../lib/hooks/_useDndFile";
 import getFileType from "../../../lib/utils/getFileType";
 
 type Props = {
@@ -20,6 +21,7 @@ export default function Item({ file }: Props) {
     <div className="relative flex-shrink-0 w-full max-h-full pb-6">
       <div className="flex flex-col items-center justify-center h-full">
         {type === "audio" && (
+          // eslint-disable-next-line jsx-a11y/media-has-caption
           <audio className="max-w-full" controls src={resourceURL} />
         )}
         {type === "image" && (

@@ -1,38 +1,38 @@
-import { KeyboardEventHandler, useState } from "react";
 import { m, Variants, useMotionValue, useTransform } from "framer-motion";
 import { wrap } from "popmotion";
+import { KeyboardEventHandler, useState } from "react";
 
+import { FilesWithType } from "../../../lib/hooks/_useDndFile";
 import Button from "../button";
-import { FilesWithType } from "../../../lib/hooks/useDndFile";
 
 import Item from "./item";
 
 const variants: Variants = {
+  center: {
+    opacity: 1,
+    rotateY: 0,
+    x: 0,
+    zIndex: 1,
+  },
   enter: (direction: number) => {
     return {
-      x: direction > 0 ? window.innerWidth / 2 : -window.innerWidth / 2,
-      rotateY: direction > 0 ? 45 : -45,
       opacity: 0,
+      rotateY: direction > 0 ? 45 : -45,
+      x: direction > 0 ? window.innerWidth / 2 : -window.innerWidth / 2,
     };
-  },
-  center: {
-    zIndex: 1,
-    x: 0,
-    rotateY: 0,
-    opacity: 1,
   },
   exit: (direction: number) => {
     return {
-      zIndex: 0,
-      x: direction < 0 ? window.innerWidth / 2 : -window.innerWidth / 2,
-      rotateY: direction < 0 ? 45 : -45,
       opacity: 0,
+      rotateY: direction < 0 ? 45 : -45,
+      x: direction < 0 ? window.innerWidth / 2 : -window.innerWidth / 2,
+      zIndex: 0,
     };
   },
 };
 
 const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
+const swipePower = (offset: number, velocity: number): number => {
   return Math.abs(offset) * velocity;
 };
 
@@ -41,7 +41,7 @@ type Props = {
   onDelete?: (index: number) => void;
 };
 
-export default function Carousel({ files, onDelete }: Props) {
+export default function Carousel({ files, onDelete }: Props): JSX.Element {
   const [[page, direction], setPage] = useState([0, 0]);
   const x = useMotionValue(0);
   const rotateY = useTransform(x, [-300, 0, 300], [-45, 0, 45]);
@@ -52,7 +52,7 @@ export default function Carousel({ files, onDelete }: Props) {
   // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
   const current = wrap(0, files.length, page);
 
-  const paginate = (newDirection: number) => {
+  const paginate = (newDirection: number): void => {
     setPage([page + newDirection, -newDirection]);
   };
 
@@ -71,7 +71,7 @@ export default function Carousel({ files, onDelete }: Props) {
           <div className="absolute inset-y-0 left-0 flex items-center justify-center h-full ">
             <button
               type="button"
-              className="flex items-center justify-center w-10 h-10 text-2xl text-white transition duration-300 ease-in-out bg-indigo-600 rounded-full shadow hover:shadow-md focus:shadow-md hover:bg-indigo-500 focus:bg-indigo-500 focus:outline-none"
+              className="flex items-center justify-center w-10 h-10 text-2xl text-white transition duration-300 ease-in-out bg-purple-600 rounded-full shadow hover:shadow-md focus:shadow-md hover:bg-purple-500 focus:bg-purple-500 focus:outline-none"
               onClick={() => paginate(-1)}
             >
               {"<"}
@@ -80,7 +80,7 @@ export default function Carousel({ files, onDelete }: Props) {
           <div className="absolute inset-y-0 right-0 flex items-center justify-center h-full ">
             <button
               type="button"
-              className="flex items-center justify-center w-10 h-10 text-2xl text-white transition duration-300 ease-in-out bg-indigo-600 rounded-full shadow hover:shadow-md focus:shadow-md hover:bg-indigo-500 focus:bg-indigo-500 focus:outline-none"
+              className="flex items-center justify-center w-10 h-10 text-2xl text-white transition duration-300 ease-in-out bg-purple-600 rounded-full shadow hover:shadow-md focus:shadow-md hover:bg-purple-500 focus:bg-purple-500 focus:outline-none"
               onClick={() => paginate(1)}
             >
               {">"}
@@ -88,15 +88,17 @@ export default function Carousel({ files, onDelete }: Props) {
           </div>
         </>
       )}
-      {onDelete && <div className="absolute inset-x-0 top-0 flex items-center justify-center w-full">
-        <Button
-          className="text-white bg-red-500 disabled:bg-gray-400 focus:bg-red-400 hover:bg-red-400"
-          onClick={() => onDelete(current)}
-          type="button"
-        >
-          No quiero subir este archivo
-        </Button>
-      </div>}
+      {onDelete && (
+        <div className="absolute inset-x-0 top-0 flex items-center justify-center w-full">
+          <Button
+            className="text-white bg-red-500 disabled:bg-gray-400 focus:bg-red-400 hover:bg-red-400"
+            onClick={() => onDelete(current)}
+            type="button"
+          >
+            No quiero subir este archivo
+          </Button>
+        </div>
+      )}
       <m.div
         key={page}
         className="flex flex-col items-center justify-center w-full h-full py-2 cursor-pointer"
@@ -106,10 +108,10 @@ export default function Carousel({ files, onDelete }: Props) {
         animate="center"
         exit="exit"
         transition={{
-          x: { type: "spring", stiffness: 300, damping: 40 },
           opacity: { duration: 0.2 },
+          x: { damping: 40, stiffness: 300, type: "spring" },
         }}
-        style={{ x, rotateY }}
+        style={{ rotateY, x }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={1}

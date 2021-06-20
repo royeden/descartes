@@ -5,7 +5,7 @@ export default function* range(
   start: number,
   end?: number,
   include = false,
-  step = 1,
+  step = 1
 ) {
   if (end === undefined) [end, start] = [start, 0];
   const countUp = start <= end;

@@ -1,0 +1,105 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true,
+    "shared-node-browser": true
+  },
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 2021, // Use the latest ecmascript standard
+    "sourceType": "module", // Allows using import/export statements
+    "ecmaFeatures": {
+      "jsx": true // Enable JSX since we're using React
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect the react version
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "node",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:@next/next/recommended",
+    "plugin:prettier/recommended" // Make this the last element so prettier config overrides other formatting rules
+  ],
+  "rules": {
+    "camelcase": 0,
+    "comma-dangle": 0,
+    "import/prefer-default-export": 0,
+    "import/no-unresolved": "off", // This raises errors for anything imported via absolute paths in tsconfig.json
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": false
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "no-console": "warn",
+    "no-nested-ternary": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": ["error", { "allowTernary": true }],
+    "sort-keys": [
+      "error",
+      "asc",
+      { "caseSensitive": true, "minKeys": 2, "natural": false }
+    ],
+    "react/react-in-jsx-scope": 0,
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "assert": "either"
+      }
+    ],
+    "jsx-a11y/label-has-for": 0,
+    "node/callback-return": "error",
+    "node/exports-style": "error",
+    "node/no-extraneous-require": "error",
+    "node/no-unsupported-features/es-builtins": "error",
+    "node/no-unsupported-features/node-builtins": "error",
+    "node/prefer-promises/fs": "error",
+    "prettier/prettier": [
+      "error",
+      { "arrowParens": "always", "singleQuote": false, "trailingComma": "es5" }
+    ],
+    "@typescript-eslint/no-unused-vars": ["error"],
+    // I suggest this setting for requiring return types on functions only where useful
+    "@typescript-eslint/explicit-function-return-type": [
+      "warn",
+      {
+        "allowExpressions": true,
+        "allowConciseArrowFunctionExpressionsStartingWithVoid": true
+      }
+    ]
+  }
+}

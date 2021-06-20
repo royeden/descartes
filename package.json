@@ -1,17 +1,21 @@
 {
-  "name": "with-tailwindcss",
+  "name": "descartes",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint . --ext js,jsx,ts,tsx",
+    "lint:quiet": "yarn lint --quiet",
+    "lint:fix": "yarn lint --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@react-spring/web": "^9.2.3",
     "@react-three/a11y": "^2.0.2",
-    "@react-three/drei": "^5.2.0",
+    "@react-three/drei": "^5.3.1",
     "@react-three/fiber": "^6.2.2",
-    "@sanity/block-content-to-react": "^3.0.0",
     "axios": "^0.21.1",
     "base64url": "^3.0.1",
     "clsx": "^1.1.1",
@@ -19,23 +23,47 @@
     "file-type": "^16.3.0",
     "framer-motion": "^4.1.9",
     "multer": "^1.4.2",
-    "next": "latest",
+    "next": "^11.0.0",
     "next-connect": "^0.10.1",
-    "next-sanity": "^0.2.0",
     "popmotion": "^9.3.5",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-modal": "^3.14.3",
     "react-spring": "^9.1.2",
+    "swr": "^0.5.6",
     "three": "^0.128.0",
     "three-stdlib": "^2.0.5"
   },
   "devDependencies": {
     "@types/multer": "^1.4.5",
-    "@types/react": "^17.0.3",
+    "@types/react": "^17.0.9",
+    "@types/react-modal": "^3.12.0",
     "@types/three": "^0.128.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
     "autoprefixer": "^10.0.4",
+    "eslint": "^7.27.0",
+    "eslint-config-next": "^11.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "postcss": "^8.1.10",
-    "tailwindcss": "^2.1.2",
-    "typescript": "^4.2.4"
+    "prettier": "^2.3.0",
+    "tailwind-scrollbar": "^1.3.1",
+    "tailwindcss": "^2.2.2",
+    "typescript": "^4.3.2"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  },
+  "engines": {
+    "node": ">=12.9.0"
   }
 }

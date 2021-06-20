@@ -7,8 +7,9 @@ import {
 import { wrap } from "popmotion";
 import { useState } from "react";
 
-import { FilesWithType } from "../../../lib/hooks/useDndFile";
+import { FilesWithType } from "../../../lib/hooks/_useDndFile";
 import range from "../../../lib/utils/range";
+
 import Item from "./item";
 
 type Props = {
@@ -16,7 +17,7 @@ type Props = {
   sideItems?: number;
 };
 
-export default function Showcase({ files, sideItems = 2 }: Props) {
+export default function Showcase({ files, sideItems = 2 }: Props): JSX.Element {
   const [[page, direction], setPage] = useState([0, 0]);
 
   const current = wrap(0, files.length, page);
@@ -31,7 +32,7 @@ export default function Showcase({ files, sideItems = 2 }: Props) {
     return { ...files[wrappedIndex], index: wrappedIndex };
   });
 
-  const paginate = (newPage: number, newDirection: number) => {
+  const paginate = (newPage: number, newDirection: number): void => {
     setPage([newPage, newDirection]);
   };
 
