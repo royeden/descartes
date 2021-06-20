@@ -40,7 +40,7 @@ export default function Upload(): JSX.Element {
         formData.append("reason", reason);
         formData.append("name", form.name || "Anónimx");
         const response = await axios.post<Resource>(
-          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create/`,
+          `${process.env.NEXT_PUBLIC_STATIC_URL as string}/resource/create`,
           formData
         );
         if (!response.data.resource_id) throw new Error("Couldn't create file");
