@@ -33,5 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-/public/**/*.jpg
+/public/resized/*.jpg
 .eslintcache

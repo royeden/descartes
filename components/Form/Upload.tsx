@@ -11,6 +11,7 @@ import {
 
 import DndFile from "~components/forms/DndFile";
 import Input from "~components/forms/input";
+import UploadingFile from "~components/ui/UploadingFile";
 import Button from "~components/ui/button";
 import { FormContext } from "~context/FormContext";
 import useMobileDetect from "~hooks/useMobileDetect";
@@ -62,12 +63,17 @@ export default function Upload(): JSX.Element {
         material para subir (Tamaño máximo 10MB).
       </p>
       <p>
+        La imagen va a quedar expuesta con el resto, pensá muy bien cual es esa
+        imagen única que querés aportar y en lo que se fue para hacerle lugar...
+      </p>
+      <p>
         Todo lo subido va a recortarse de forma cuadrada para poder entrar en la
         galería.
       </p>
       {!file && (
         <DndFile
           accept="image/*"
+          className="bg-black"
           loading={loading}
           name="archivo"
           onChange={(chosen) => setFile(chosen as File)}
@@ -79,7 +85,13 @@ export default function Upload(): JSX.Element {
           </p>
         </DndFile>
       )}
-      {resourceURL && (
+      {loading && (
+        <div className="flex flex-col items-center w-full text-white">
+          <UploadingFile status="loading" />
+          <p>Subiendo tu archivo...</p>
+        </div>
+      )}
+      {!loading && resourceURL && (
         <div className="flex flex-col justify-center flex-1 h-full pt-16">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -102,7 +114,6 @@ export default function Upload(): JSX.Element {
           <div className="flex justify-between">
             <Button
               className="w-48 px-4 text-white bg-rose-600 focus:bg-rose-500 hover:bg-rose-500 active:bg-rose-400 disabled:bg-gray-400"
-              disabled={loading}
               onClick={() => {
                 if (!loading) setFile(undefined);
               }}
@@ -112,7 +123,7 @@ export default function Upload(): JSX.Element {
             </Button>
             <Button
               className="w-48 px-4 text-white bg-purple-600 focus:bg-purple-500 hover:bg-purple-500 active:bg-purple-400 disabled:bg-gray-400"
-              disabled={!reason || loading}
+              disabled={!reason}
               onClick={handleUpload}
               type="button"
             >

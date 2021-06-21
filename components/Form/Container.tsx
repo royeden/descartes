@@ -15,7 +15,7 @@ export default function Container(): JSX.Element {
       {form.uploaded ? (
         <Explorer />
       ) : (
-        <div className="flex flex-col items-center w-full h-full pt-4">
+        <div className="flex flex-col items-center w-full h-full pt-4 font-rubik">
           {form.step === 0 && <Name />}
           {form.step === 1 && <Gallery />}
           {form.step === 2 && <Upload />}

@@ -56,7 +56,7 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
   const { setPlaying } = useContext(SoundContext);
 
   return (
-    <div className="relative flex-1">
+    <div className="relative flex-1 font-rubik">
       <LCanvas
         center={center}
         className="bg-black"
@@ -91,7 +91,7 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
               setControlsEnabled(true);
             }}
           >
-            <div className="px-4 bg-black bg-opacity-50 hover:bg-opacity-75 w-max">
+            <div className="w-1/3 max-w-full px-4 bg-black bg-opacity-50 hover:bg-opacity-75">
               <h1 className="text-lg font-bold">{currentResource.name}</h1>
               <p>Nombre: {currentResource.name}.</p>
               <p>Tamaño original: {currentResource.original_size}.</p>
@@ -116,8 +116,14 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
             </div>
           </button>
         ) : (
-          <div className="inset-0 flex flex-col items-center justify-center w-full h-full bg-black bg-opacity-50">
-            <h1>Ver basura virtual arder</h1>
+          <div className="inset-0 flex flex-col items-center justify-center w-full h-full space-y-4 bg-black bg-opacity-50 md:space-y-8">
+            <h1 className="text-4xl font-bold md:text-5xl font-montserrat">
+              Galería de Descartes
+            </h1>
+            <p>
+              Bienvenidx a la galería, acá están todas las imágenes y sus datos,
+              que se van actualizando casi en tiempo real:
+            </p>
             <Button
               className="text-white bg-purple-600 pointer-events-auto focus:bg-purple-500 hover:bg-purple-500"
               onClick={() => {

@@ -105,7 +105,7 @@ export default function Home(): JSX.Element {
   );
   return (
     <Layout
-      className="flex flex-col items-center flex-1 px-5 pt-10 text-center sm:px-20"
+      className="flex flex-col items-center flex-1 px-5 pt-20 text-center bg-white sm:px-20"
       seo={{
         description: "Donde volcar tu basura digital...",
         title: "Basura Digital",

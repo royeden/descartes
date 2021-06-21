@@ -67,7 +67,7 @@ function SVGFilter(): JSX.Element {
   );
 }
 
-export default function Loading({
+export default function UploadingFile({
   className,
   status,
   size = 48,

@@ -32,13 +32,14 @@ const LINKS = [
   },
 ];
 
+// TODO add mobile menu
 export default function Nav({ className = "" }: Props): JSX.Element {
   const router = useRouter();
 
   return (
     <nav
       className={clsx(
-        "fixed h-16 w-full z-30 flex bg-true-gray-900 text-white font-bold shadow-2xl",
+        "fixed h-16 w-full z-30 flex bg-true-gray-900 text-white font-bold shadow-2xl font-rubik",
         className
       )}
     >

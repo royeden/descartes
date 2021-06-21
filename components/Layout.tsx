@@ -35,7 +35,7 @@ export function Layout({
         {children}
       </main>
       {footer && (
-        <footer className="px-4">
+        <footer className="px-4 bg-white">
           <div className="flex items-center justify-center w-full h-24 pb-2 border-t-2 border-gray-200">
             <p>
               Hecho por{" "}

@@ -23,7 +23,7 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout
-      className="flex flex-col flex-1 text-center text-white bg-black"
+      className="flex flex-col flex-1 text-center text-white bg-black bg-opacity-10"
       seo={{
         description: "Galería interactiva colaborativa",
         title: "Descartes: Basura Digital",

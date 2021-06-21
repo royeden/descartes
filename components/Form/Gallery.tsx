@@ -67,6 +67,9 @@ export default function Gallery(): JSX.Element {
         <p>
           <RevealText text="Para participar de la experiencia, es necesario que hagas espacio para la imagen que vas a subir:" />
         </p>
+        <p>
+          <RevealText text="Para participar de la experiencia, es necesario que hagas espacio para la imagen que vas a subir:" />
+        </p>
         {data ? (
           <>
             <p>
@@ -82,7 +85,7 @@ export default function Gallery(): JSX.Element {
                 className="font-faded"
                 text={`Elegí ${
                   data?.choose - form.selected.length
-                } de las siguientes imágenes para "descartar".`}
+                } de las siguientes imágenes para descartar. Serán procesadas para "hacer lugar" para tus imágenes y no van a poder ser vistas de la misma manera...`}
               />
             </p>
           </>
