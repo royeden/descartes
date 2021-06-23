@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       commits,
       resources,
-      revalidate: 86400000,
+      revalidate: 10800000,
     },
   };
 };
