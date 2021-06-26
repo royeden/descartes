@@ -44,7 +44,7 @@ export default function Estadisticas({
                   <ul className="space-y-0.5 list-disc list-inside md:space-y-1">
                     <li>
                       Cantidad de imágenes subidas:{" "}
-                      <span className="font-bold text-rose-400">
+                      <span className="font-bold text-fuchsia-400">
                         {data.resources.length}
                       </span>
                       .
@@ -52,9 +52,9 @@ export default function Estadisticas({
                     <li>
                       Total de píxeles actual (los píxeles que ocuparían todas
                       las imágenes actuales desplegadas en una grilla):{" "}
-                      <span className="font-bold text-rose-400">
+                      <span className="font-bold text-fuchsia-400">
                         {data.resources.reduce(
-                          (acc, { size }) => acc + size,
+                          (acc, { size }) => acc + size ** 2,
                           0
                         )}
                       </span>
@@ -63,7 +63,7 @@ export default function Estadisticas({
                     <li>
                       Total absoluto de píxeles (los píxeles que ocuparían las
                       imágenes originales desplegadas en una grilla):{" "}
-                      <span className="font-bold text-rose-400">
+                      <span className="font-bold text-fuchsia-400">
                         {data.resources.reduce(
                           (acc, { original_size }) => acc + original_size,
                           0
@@ -74,7 +74,7 @@ export default function Estadisticas({
                     <li>
                       Total de personas que hicieron aportes (los aportes
                       anónimos se cuentan como uno sólo):{" "}
-                      <span className="font-bold text-rose-400">
+                      <span className="font-bold text-fuchsia-400">
                         {
                           new Set(...data.resources.map(({ name }) => name))
                             .size
@@ -91,11 +91,13 @@ export default function Estadisticas({
                       Primer implementación de API de descartes (donde todavía
                       se pueden hacer aportes de imágenes de archivo a una
                       carpeta de Google drive):{" "}
-                      <span className="font-bold text-rose-400">38</span>.
+                      <span className="font-bold text-fuchsia-400">38</span>.
                     </li>
                     <li>
                       Cantidad de commits (cuantas veces fue iterado el código):{" "}
-                      <span className="font-bold text-rose-400">{commits}</span>
+                      <span className="font-bold text-fuchsia-400">
+                        {commits}
+                      </span>
                       .
                     </li>
                   </ul>
