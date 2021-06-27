@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import type { Resource } from "pages/api/resources/get-all";
 import type { LimitedResourcesResponse } from "pages/api/resources/get-limited";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 
 import DiscardModal from "./DiscardModal";
@@ -18,7 +18,8 @@ export default function Gallery(): JSX.Element {
 
   const { data } = useSWR<LimitedResourcesResponse>(
     "/api/resources/get-limited",
-    (url) => fetch(url).then((res) => res.json())
+    (url) => fetch(url).then((res) => res.json()),
+    { refreshInterval: 3 * 60 * 1000 }
   );
 
   const [resource, setResource] = useState<Resource | undefined>(undefined);
@@ -46,12 +47,23 @@ export default function Gallery(): JSX.Element {
     }
   }, [data, resource]);
 
+  useEffect(() => {
+    if (
+      resource &&
+      data?.resources &&
+      !data.resources.find(
+        ({ resource_id }) => resource.resource_id === resource_id
+      )
+    )
+      setResource(undefined);
+  }, [data, resource]);
+
   return (
     <div
       className={clsx(
         "w-screen max-w-full max-h-screen overflow-x-hidden text-left text-sm md:text-base",
         {
-          "overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-rose-400":
+          "overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-fuchsia-400":
             !resource,
           "overflow-y-hidden": Boolean(resource),
         }

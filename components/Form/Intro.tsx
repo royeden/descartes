@@ -20,7 +20,7 @@ export default function Intro({ onStart }: Props): JSX.Element {
   });
 
   return (
-    <div className="flex flex-col items-center px-4 py-4 space-y-2 md:space-y-8 md:py-20 md:px-20 scrollbar-thin scrollbar-thumb-rose-400">
+    <div className="flex flex-col items-center px-4 py-4 space-y-2 md:space-y-8 md:py-20 md:px-20 scrollbar-thin scrollbar-thumb-fuchsia-400">
       <h1 className="text-5xl font-bold font-montserrat md:text-6xl">
         <RevealText
           text="Descartes: Basura Digital"

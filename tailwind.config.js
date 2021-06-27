@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        rose: colors.rose,
+        fuchsia: colors.fuchsia,
         "true-gray": colors.trueGray,
       },
       fontFamily: {

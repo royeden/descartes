@@ -127,7 +127,7 @@ export default function DiscardModal({
                     </label>
                     <Input
                       maxLength={1023}
-                      className="w-full p-2 my-4 overflow-y-auto transition duration-300 ease-in-out bg-transparent border-2 border-gray-600 rounded shadow-sm hover:border-purple-800 focus:border-purple-800 focus:outline-none focus:ring-1 ring-purple-400 disabled:bg-gray-100 disabled:text-gray-900 disabled:cursor-not-allowed scrollbar-thin scrollbar-thumb-rose-400 max-h-36 md:w-auto"
+                      className="w-full p-2 my-4 overflow-y-auto transition duration-300 ease-in-out bg-transparent border-2 border-gray-600 rounded shadow-sm hover:border-purple-800 focus:border-purple-800 focus:outline-none focus:ring-1 ring-purple-400 disabled:bg-gray-100 disabled:text-gray-900 disabled:cursor-not-allowed scrollbar-thin scrollbar-thumb-fuchsia-400 max-h-36 md:w-auto"
                       type="textarea"
                       value={reason}
                       name="reason"
@@ -137,7 +137,7 @@ export default function DiscardModal({
                       }
                     />
                     <Button
-                      className="self-center my-2 text-white transition duration-300 ease-in-out shadow active:shadow-none bg-rose-600 hover:bg-rose-500 focus:bg-rose-500 active:bg-pink-400 disabled:bg-gray-700"
+                      className="self-center my-2 text-white transition duration-300 ease-in-out shadow active:shadow-none bg-fuchsia-600 hover:bg-fuchsia-500 focus:bg-fuchsia-500 active:bg-pink-400 disabled:bg-gray-700"
                       disabled={!reason || loading}
                       onClick={handleDiscard}
                       type="button"
@@ -166,7 +166,7 @@ export default function DiscardModal({
                       />
                     </p>
                     <p>
-                      <RevealText text={`Tamaño actual: ${resource.size}`} />
+                      <RevealText text={`Tamaño actual: ${resource.size ** 2}`} />
                     </p>
                     <p>
                       <RevealText text={`Subido por: ${resource.author}`} />
@@ -179,7 +179,7 @@ export default function DiscardModal({
                       </p>
                     )}
                     <Button
-                      className="self-center my-2 text-white transition duration-300 ease-in-out shadow active:shadow-none bg-rose-600 hover:bg-rose-500 focus:bg-rose-500 active:bg-pink-400"
+                      className="self-center my-2 text-white transition duration-300 ease-in-out shadow active:shadow-none bg-fuchsia-600 hover:bg-fuchsia-500 focus:bg-fuchsia-500 active:bg-pink-400"
                       onClick={() => setDiscarding(true)}
                       // eslint-disable-next-line jsx-a11y/tabindex-no-positive
                       tabIndex={2}

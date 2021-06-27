@@ -103,7 +103,7 @@ export default function Upload(): JSX.Element {
             Ingresá un épigrafe para tu imagen:
           </label>
           <Input
-            className="w-full p-2 my-4 overflow-y-auto transition duration-300 ease-in-out bg-transparent border-2 border-gray-600 rounded shadow-sm hover:border-purple-800 focus:border-purple-800 focus:outline-none focus:ring-1 ring-purple-400 disabled:bg-gray-100 disabled:text-gray-900 disabled:cursor-not-allowed scrollbar-thin scrollbar-thumb-rose-400 max-h-36 md:w-auto"
+            className="w-full p-2 my-4 overflow-y-auto transition duration-300 ease-in-out bg-transparent border-2 border-gray-600 rounded shadow-sm hover:border-purple-800 focus:border-purple-800 focus:outline-none focus:ring-1 ring-purple-400 disabled:bg-gray-100 disabled:text-gray-900 disabled:cursor-not-allowed scrollbar-thin scrollbar-thumb-fuchsia-400 max-h-36 md:w-auto"
             maxLength={1023}
             onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
               setReason(event.target.value)
@@ -113,7 +113,7 @@ export default function Upload(): JSX.Element {
           />
           <div className="flex justify-between">
             <Button
-              className="w-48 px-4 text-white bg-rose-600 focus:bg-rose-500 hover:bg-rose-500 active:bg-rose-400 disabled:bg-gray-400"
+              className="w-48 px-4 text-white bg-fuchsia-600 focus:bg-fuchsia-500 hover:bg-fuchsia-500 active:bg-fuchsia-400 disabled:bg-gray-400"
               onClick={() => {
                 if (!loading) setFile(undefined);
               }}

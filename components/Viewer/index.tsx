@@ -95,7 +95,7 @@ export default function Viewer({ center, resources }: Props): JSX.Element {
               <h1 className="text-lg font-bold">{currentResource.name}</h1>
               <p>Nombre: {currentResource.name}.</p>
               <p>Tamaño original: {currentResource.original_size}.</p>
-              <p>Tamaño actual: {currentResource.size}.</p>
+              <p>Tamaño actual: {currentResource.size ** 2}.</p>
               {epigraph && (
                 <>
                   <p>Epígrafe: </p>

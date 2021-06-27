@@ -35,7 +35,7 @@ export default function Creditos(): JSX.Element {
             <h2 className="text-xl font-bold">
               Sitio web:{" "}
               <a
-                className="font-bold underline transition-colors duration-300 ease-in-out text-rose-400 hover:text-rose-300 focus:text-rose-300 focus:outline-none"
+                className="font-bold underline transition-colors duration-300 ease-in-out text-fuchsia-400 hover:text-fuchsia-300 focus:text-fuchsia-300 focus:outline-none"
                 href="https://github.com/royeden/descartes"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -52,7 +52,7 @@ export default function Creditos(): JSX.Element {
               {LINKS.map(({ link, social }) => (
                 <li key={link}>
                   <a
-                    className="font-bold underline transition-colors duration-300 ease-in-out text-rose-400 hover:text-rose-300 focus:text-rose-300 focus:outline-none"
+                    className="font-bold underline transition-colors duration-300 ease-in-out text-fuchsia-400 hover:text-fuchsia-300 focus:text-fuchsia-300 focus:outline-none"
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"

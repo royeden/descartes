@@ -45,8 +45,8 @@ export default function Nav({ className = "" }: Props): JSX.Element {
     >
       <PlaySound />
       <div
-        className="flex"
-        //  className="hidden md:flex"
+        // className="flex"
+        className="hidden md:flex"
       >
         {LINKS.map(({ label, url }) => (
           <Link href={url} key={label}>
