@@ -166,7 +166,9 @@ export default function DiscardModal({
                       />
                     </p>
                     <p>
-                      <RevealText text={`Tamaño actual: ${resource.size ** 2}`} />
+                      <RevealText
+                        text={`Tamaño actual: ${resource.size ** 2}`}
+                      />
                     </p>
                     <p>
                       <RevealText text={`Subido por: ${resource.author}`} />
