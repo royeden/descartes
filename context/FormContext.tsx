@@ -7,8 +7,8 @@ import {
   useState,
 } from "react";
 
-import useLocalStorage from "~hooks/useLocalStorage";
 import useObjectState, { DispatchPartial } from "~hooks/useObjectState";
+import useSessionStorage from "~hooks/useSessionStorage";
 
 type FormState = {
   name: string;
@@ -35,7 +35,7 @@ type Props = {
 
 export default function FormProvider({ children }: Props): JSX.Element {
   const [loading, setLoading] = useState(false);
-  const [localState, setLocalState] = useLocalStorage<FormState>("form", {
+  const [localState, setLocalState] = useSessionStorage<FormState>("form", {
     name: "",
     reason: "",
     selected: [],
