@@ -60,6 +60,9 @@
     "tailwindcss": "^2.2.2",
     "typescript": "^4.3.2"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
   }
